@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Powder &amp; Covenant — Sandbox</title>
+  <style>
+    :root {
+      --bg: #0b0a0c;
+      --ink: #e6e0d4;
+      --dim: #8d8578;
+      --health: #b8322f;
+      --stamina: #c9a227;
+      --grit: #6e3fb3;
+      --panel: rgba(14, 12, 16, 0.92);
+    }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; overflow: hidden; }
+    #stage { position: fixed; inset: 0; display: grid; place-items: center; }
+    canvas#game { image-rendering: pixelated; image-rendering: crisp-edges; background: #1a1714; cursor: crosshair; }
+    #hud { position: fixed; left: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 6px; pointer-events: none; font-size: 14px; }
+    .bar { width: 220px; height: 12px; background: #221e1c; border: 1px solid #3a332e; position: relative; }
+    .bar > i { position: absolute; inset: 0; width: 100%; transform-origin: left; transform: scaleX(1); }
+    .bar.health > i { background: var(--health); }
+    .bar.stamina > i { background: var(--stamina); }
+    .bar.grit > i { background: var(--grit); }
+    .bar > span { position: absolute; right: 6px; top: -1px; font-size: 11px; color: var(--ink); text-shadow: 0 1px 0 #000; }
+    #hotbar { position: fixed; right: 16px; bottom: 16px; display: flex; gap: 8px; pointer-events: none; }
+    .slot { width: 96px; padding: 6px 8px; border: 1px solid #3a332e; background: var(--panel); font-size: 12px; color: var(--dim); }
+    .slot.active { border-color: #c9a227; color: var(--ink); }
+    .slot .name { font-size: 13px; display: block; }
+    .slot .ammo { display: block; font-family: ui-monospace, Consolas, monospace; }
+    .slot .state { display: block; font-size: 11px; color: #c9a227; min-height: 13px; }
+    #status { position: fixed; left: 16px; top: 16px; font-size: 12px; color: var(--dim); pointer-events: none; font-family: ui-monospace, Consolas, monospace; white-space: pre; }
+    #death { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,0.6); font-size: 28px; letter-spacing: 2px; }
+    #death.show { display: grid; }
+    #debug { position: fixed; right: 16px; top: 16px; width: 300px; max-height: calc(100vh - 140px); overflow-y: auto; background: var(--panel); border: 1px solid #3a332e; padding: 10px 12px; font-size: 12px; display: none; }
+    #debug.show { display: block; }
+    #debug h3 { margin: 10px 0 4px; font-size: 12px; color: #c9a227; text-transform: uppercase; letter-spacing: 1px; }
+    #debug .row { display: grid; grid-template-columns: 1fr 70px; align-items: center; gap: 6px; margin: 3px 0; }
+    #debug label { color: var(--dim); }
+    #debug input[type=number] { width: 64px; background: #1a1714; color: var(--ink); border: 1px solid #3a332e; font: inherit; padding: 2px 4px; }
+    #debug input[type=range] { width: 100%; grid-column: 1 / -1; }
+    #debug button { background: #2a2420; color: var(--ink); border: 1px solid #3a332e; font: inherit; padding: 4px 8px; cursor: pointer; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div id="stage"><canvas id="game" width="960" height="540"></canvas></div>
+  <div id="status"></div>
+  <div id="hud">
+    <div class="bar health"><i></i><span></span></div>
+    <div class="bar stamina"><i></i><span></span></div>
+    <div class="bar grit"><i></i><span></span></div>
+  </div>
+  <div id="hotbar"></div>
+  <div id="debug"></div>
+  <div id="death">YOU ARE DEAD — Enter to try again</div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
