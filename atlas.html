@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Atlas inspector</title>
+<style>
+  body { margin: 0; background: #111; color: #eee; font: 11px monospace; }
+  canvas { image-rendering: pixelated; display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+  // Dev tool: ?sheet=b02_fortifications&cell=48&scale=1.5 draws a sheet with a labelled grid.
+  const q = new URLSearchParams(location.search);
+  const sheets = (q.get('sheets') || q.get('sheet') || 'a2_ground').split(',');
+  const cell = parseInt(q.get('cell') || '48', 10);
+  const scale = parseFloat(q.get('scale') || '1.5');
+  const imgs = sheets.map((s) => { const i = new Image(); i.src = `sprites/acw/${s}.png`; return i; });
+  Promise.all(imgs.map((i) => new Promise((r) => { i.onload = r; }))).then(() => {
+    const c = document.getElementById('c');
+    c.width = Math.max(...imgs.map((i) => i.width)) * scale;
+    c.height = imgs.reduce((h, i) => h + i.height * scale + 24, 0);
+    const ctx = c.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = '#2a2a3a';
+    ctx.fillRect(0, 0, c.width, c.height);
+    let oy = 0;
+    imgs.forEach((img, idx) => {
+      ctx.fillStyle = '#fff';
+      ctx.font = `${Math.round(11 * scale)}px monospace`;
+      ctx.fillText(sheets[idx], 4, oy + 12 * scale);
+      oy += 24;
+      ctx.drawImage(img, 0, oy, img.width * scale, img.height * scale);
+      ctx.strokeStyle = 'rgba(255,0,255,0.6)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= img.width; x += cell) { ctx.beginPath(); ctx.moveTo(x * scale + 0.5, oy); ctx.lineTo(x * scale + 0.5, oy + img.height * scale); ctx.stroke(); }
+      for (let y = 0; y <= img.height; y += cell) { ctx.beginPath(); ctx.moveTo(0, oy + y * scale + 0.5); ctx.lineTo(img.width * scale, oy + y * scale + 0.5); ctx.stroke(); }
+      ctx.font = `${Math.round(9 * scale)}px monospace`;
+      for (let r = 0; r < img.height / cell; r++) for (let col = 0; col < img.width / cell; col++) {
+        const t = `${col},${r}`;
+        ctx.fillStyle = 'rgba(0,0,0,0.7)';
+        ctx.fillRect(col * cell * scale + 1, oy + r * cell * scale + 1, t.length * 5.6 * scale + 3, 10 * scale);
+        ctx.fillStyle = '#ff0';
+        ctx.fillText(t, col * cell * scale + 2, oy + r * cell * scale + 9 * scale);
+      }
+      oy += img.height * scale;
+    });
+  });
+</script>
+</body>
+</html>
