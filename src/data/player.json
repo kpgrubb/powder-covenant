@@ -1,0 +1,23 @@
+{
+  "radius": 12,
+  "speed": 150,
+  "sprintMultiplier": 1.6,
+  "maxHealth": 100,
+  "maxStamina": 100,
+  "staminaDrainSprint": 28,
+  "staminaRegen": 22,
+  "staminaRegenDelay": 0.8,
+  "maxGrit": 100,
+  "dodge": {
+    "duration": 0.38,
+    "speed": 420,
+    "staminaCost": 25,
+    "invulnWindow": 0.22
+  },
+  "startingWeapons": ["saber", "pistol", "rifle"],
+  "startingAmmo": { "pistol": 24, "rifle": 8 },
+  "maxAmmo": { "pistol": 60, "rifle": 20 },
+  "visual": "player",
+  "hitFlash": 0.12,
+  "sounds": { "hurt": "player_hurt", "death": "player_death", "dodge": "dodge" }
+}

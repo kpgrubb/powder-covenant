@@ -1,0 +1,42 @@
+{
+  "tileSize": 32,
+  "widthTiles": 40,
+  "heightTiles": 30,
+  "playerSpawn": { "x": 192, "y": 832 },
+  "cover": [
+    { "id": "wall_mid", "type": "wall", "x": 544, "y": 352, "w": 192, "h": 32 },
+    { "id": "wall_left", "type": "wall", "x": 352, "y": 160, "w": 32, "h": 160 },
+    { "id": "wall_right", "type": "wall", "x": 896, "y": 480, "w": 32, "h": 192 },
+    { "id": "wall_bottom", "type": "wall", "x": 416, "y": 768, "w": 32, "h": 128 },
+
+    { "id": "crate_a", "type": "crate", "x": 224, "y": 608, "w": 64, "h": 64 },
+    { "id": "crate_b", "type": "crate", "x": 288, "y": 640, "w": 32, "h": 32 },
+    { "id": "crate_c", "type": "crate", "x": 768, "y": 192, "w": 64, "h": 32 },
+    { "id": "crate_d", "type": "crate", "x": 1024, "y": 224, "w": 64, "h": 32 },
+    { "id": "crate_e", "type": "crate", "x": 640, "y": 736, "w": 64, "h": 64 },
+    { "id": "crate_f", "type": "crate", "x": 1120, "y": 768, "w": 32, "h": 32 },
+
+    { "id": "fence_1", "type": "fence", "x": 96, "y": 412, "w": 96, "h": 8 },
+    { "id": "fence_2", "type": "fence", "x": 224, "y": 412, "w": 96, "h": 8 },
+    { "id": "fence_3", "type": "fence", "x": 352, "y": 412, "w": 128, "h": 8 },
+
+    { "id": "sandbags_a", "type": "low", "x": 480, "y": 608, "w": 128, "h": 24 },
+    { "id": "sandbags_b", "type": "low", "x": 800, "y": 800, "w": 24, "h": 128 },
+    { "id": "sandbags_c", "type": "low", "x": 1088, "y": 544, "w": 96, "h": 24 },
+    { "id": "sandbags_d", "type": "low", "x": 160, "y": 224, "w": 24, "h": 96 }
+  ],
+  "coverTypes": {
+    "wall":  { "blocksMove": true, "blocksShots": true, "blocksSight": true,  "visual": "wall" },
+    "crate": { "blocksMove": true, "blocksShots": true, "blocksSight": true,  "visual": "crate" },
+    "fence": { "blocksMove": true, "blocksShots": false, "blocksSight": false, "visual": "fence" },
+    "low":   { "blocksMove": true, "blocksShots": true, "blocksSight": false, "visual": "sandbags" }
+  },
+  "patrolRoutes": [
+    [ { "x": 1120, "y": 128 }, { "x": 1120, "y": 416 }, { "x": 960, "y": 416 }, { "x": 960, "y": 128 } ],
+    [ { "x": 448, "y": 96 },   { "x": 800, "y": 96 },   { "x": 800, "y": 288 }, { "x": 448, "y": 288 } ],
+    [ { "x": 1024, "y": 704 }, { "x": 1216, "y": 704 }, { "x": 1216, "y": 880 }, { "x": 1024, "y": 880 } ],
+    [ { "x": 384, "y": 480 },  { "x": 704, "y": 480 },  { "x": 704, "y": 560 },  { "x": 384, "y": 560 } ]
+  ],
+  "coverSpot": { "offset": 22, "spacing": 32 },
+  "overCoverDistance": 26
+}

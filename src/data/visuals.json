@@ -1,0 +1,19 @@
+{
+  "_comment": "Each entity references a visual by key. type=shape is a placeholder; type=sprite loads a PNG from public/sprites. Swap entries here, not code.",
+  "player":        { "type": "shape", "shape": "circle", "color": "#4d7cc7", "outline": "#dfe8f5", "size": 24, "facing": true, "facingColor": "#f0e6c8" },
+  "enemy_regular": { "type": "shape", "shape": "circle", "color": "#8a7a5a", "outline": "#3a2f22", "size": 24, "facing": true, "facingColor": "#e6d9b8" },
+  "wall":          { "type": "shape", "shape": "rect", "color": "#4a4440", "outline": "#2b2724" },
+  "crate":         { "type": "shape", "shape": "rect", "color": "#7a5a34", "outline": "#3f2d18" },
+  "fence":         { "type": "shape", "shape": "rect", "color": "#a88c5e", "outline": "#5c4a2e" },
+  "sandbags":      { "type": "shape", "shape": "rect", "color": "#9a8a5a", "outline": "#5a5032", "pattern": "stripes" },
+  "bullet":        { "type": "shape", "shape": "circle", "color": "#f2d16b", "size": 4, "trail": 10 },
+  "bullet_heavy":  { "type": "shape", "shape": "circle", "color": "#ffb347", "size": 5, "trail": 22 },
+  "bullet_enemy":  { "type": "shape", "shape": "circle", "color": "#e07a5f", "size": 4, "trail": 8 },
+  "bullet_cursed": { "type": "shape", "shape": "circle", "color": "#b06cff", "size": 5, "trail": 16 },
+  "slash":         { "type": "shape", "shape": "arc", "color": "#e8e0d0" },
+  "curse_glow":    { "type": "shape", "shape": "ring", "color": "#b06cff", "size": 30 },
+  "pickup_ammo":   { "type": "shape", "shape": "rect", "color": "#d6b45a", "outline": "#6b5a2e", "size": 10 },
+  "floor":         { "type": "shape", "shape": "grid", "color": "#1a1714", "line": "#221e1a" },
+
+  "_sprite_example": { "type": "sprite", "src": "sprites/player.png", "frameW": 48, "frameH": 48, "size": 48, "facing": true }
+}
