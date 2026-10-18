@@ -11,6 +11,16 @@ npm run dev
 
 Open http://localhost:5180. Click the canvas once so it has focus.
 
+## Live build
+
+https://kpgrubb.github.io/powder-covenant/
+
+```
+npm run deploy
+```
+
+Builds `dist/` and publishes it to the `gh-pages` branch. Source is on `master`.
+
 ## Test
 
 ```
