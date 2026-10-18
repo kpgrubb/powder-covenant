@@ -5,7 +5,7 @@
     "health": 60,
     "speed": 115,
     "weapon": "carbine_enemy",
-    "accuracy": 0.68,
+    "accuracy": 0.78,
     "spreadAtZeroAccuracy": 28,
     "spreadAtFullAccuracy": 1.5,
     "visionRange": 400,

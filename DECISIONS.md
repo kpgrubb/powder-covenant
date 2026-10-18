@@ -62,3 +62,19 @@ Crisp text, sliders and checkboxes for free. The debug panel is generated from a
 ## D-010 · Audio: hook layer with silent placeholder files — 10-18
 
 `audio.play('fire_pistol')` resolves through `sounds.json` to a file under `public/audio/`. Placeholder files are generated silent WAVs. Swapping real audio is a file replacement.
+
+## D-011 · Vision cone gates discovery only — 10-18
+
+First probe showed an enemy peeking around a crate never fired: its cone followed its sidestep direction, so the player sat at 90° and was "unseen". Now the cone applies only in `patrol` and `search`. An alerted enemy needs range and line of sight, nothing else, and turns to face its last-known position whenever it loses sight. Reads as "they know you're there", which is true.
+
+## D-012 · Click per shot, auto-reload on empty — 10-18
+
+Every weapon fires on mouse *press*, never on hold. A six-shot cylinder clicked six times is the rhythm the Zero Sievert touchstone asks for; holding would turn the pistol into an SMG. When the last round leaves the clip, reload starts on its own (if reserve exists) so the player is never punished for not pressing R during a firefight; damage still interrupts it.
+
+## D-013 · Dodge cancels a reload — 10-18
+
+Rolling with a half-loaded cylinder loses the reload progress. It makes "roll now or finish loading" a real choice and keeps the roll from being free.
+
+## D-014 · Enemies mildly prefer chest-high cover — 10-18
+
+Spot scoring gives a small bonus to cover they can see over. Behind a wall they must peek, which gives the player a window; behind sandbags they fire continuously but can be flanked. Mixing both is what makes a group feel varied.

@@ -56,7 +56,7 @@
   "carbine_enemy": {
     "name": "Confederate carbine",
     "kind": "projectile",
-    "damage": 11,
+    "damage": 13,
     "range": 420,
     "fireRate": 6,
     "clipSize": 0,

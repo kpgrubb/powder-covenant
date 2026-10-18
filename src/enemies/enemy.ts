@@ -210,11 +210,14 @@ export class EnemySystem {
     // --- perception ---
     const sawBefore = e.canSee;
     e.canSee = false;
+    // The vision cone only gates *discovery*. Once alerted, an enemy knows
+    // where to look; it needs only range and line of sight (D-011).
+    const unaware = e.state === 'patrol' || e.state === 'search';
     if (player) {
       const d = dist(e.pos, player.pos);
       if (d <= def.visionRange) {
         const ang = Math.atan2(player.pos.y - e.pos.y, player.pos.x - e.pos.x);
-        const inCone = Math.abs(angleDiff(e.facing, ang)) <= (def.visionCone / 2) * DEG || d < 48;
+        const inCone = !unaware || Math.abs(angleDiff(e.facing, ang)) <= (def.visionCone / 2) * DEG || d < 48;
         if (inCone && this.arena.hasLineOfSight(e.pos, player.pos)) e.canSee = true;
       }
     }
@@ -224,6 +227,7 @@ export class EnemySystem {
       if (!sawBefore) e.firstShotTimer = def.firstShotDelay;
     } else {
       e.lostTimer += dt;
+      if (!unaware && e.lastKnown) e.facing = Math.atan2(e.lastKnown.y - e.pos.y, e.lastKnown.x - e.pos.x);
     }
 
     switch (e.state) {
@@ -408,6 +412,8 @@ export class EnemySystem {
       const d = dist(s, threat);
       if (d < def.engageMin || d > def.engageMax) continue;
       let cost = Math.abs(d - def.engageIdeal) / 100 + dist(e.pos, s) / 160;
+      // Chest-high cover lets them fire without peeking; mild preference.
+      if (!s.cover.rules.blocksSight) cost -= 0.5;
       if (pref === 'closer') cost += d / 120;
       if (pref === 'farther') cost -= d / 250;
       const bearing = Math.atan2(s.y - threat.y, s.x - threat.x);
