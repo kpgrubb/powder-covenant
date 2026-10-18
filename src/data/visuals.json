@@ -1,19 +1,35 @@
 {
-  "_comment": "Each entity references a visual by key. type=shape is a placeholder; type=sprite loads a PNG from public/sprites. Swap entries here, not code.",
-  "player":        { "type": "shape", "shape": "circle", "color": "#4d7cc7", "outline": "#dfe8f5", "size": 24, "facing": true, "facingColor": "#f0e6c8" },
-  "enemy_regular": { "type": "shape", "shape": "circle", "color": "#8a7a5a", "outline": "#3a2f22", "size": 24, "facing": true, "facingColor": "#e6d9b8" },
-  "wall":          { "type": "shape", "shape": "rect", "color": "#4a4440", "outline": "#2b2724" },
-  "crate":         { "type": "shape", "shape": "rect", "color": "#7a5a34", "outline": "#3f2d18" },
-  "fence":         { "type": "shape", "shape": "rect", "color": "#a88c5e", "outline": "#5c4a2e" },
-  "sandbags":      { "type": "shape", "shape": "rect", "color": "#9a8a5a", "outline": "#5a5032", "pattern": "stripes" },
+  "_comment": "Each entity or cover references a visual by key. Kinds: shape (placeholder), sprite (single image), sprite4 (one sheet cell per facing; left may be 'flip'), tile (sheet cells tiled over a rect), floor (base + patches, cached). Sheets live under public/sprites/. Cells are 48 px. Swap entries here, not code.",
+
+  "player":        { "type": "sprite4", "sheet": "acw/b05_union", "size": 48, "dirs": { "right": [7, 0], "left": "flip", "down": [0, 0], "up": [9, 9] }, "facing": true, "facingColor": "#f0e6c8" },
+  "enemy_regular": { "type": "sprite4", "sheet": "acw/b04_confederate", "size": 48, "dirs": { "right": [5, 3], "left": "flip", "down": [0, 0], "up": [7, 10] }, "facing": false },
+
+  "floor":         { "type": "floor", "base": "ground_dirt", "patches": [ { "visual": "ground_grass", "weight": 0.05 }, { "visual": "ground_dirt_dark", "weight": 0.04 } ], "seed": 7, "color": "#1a1714", "line": "#221e1a" },
+  "ground_dirt":      { "type": "tile", "sheet": "acw/a2_ground", "px": 120, "py": 72, "pw": 48, "ph": 48 },
+  "ground_dirt_dark": { "type": "tile", "sheet": "acw/a2_ground", "px": 24, "py": 72, "pw": 48, "ph": 48 },
+  "ground_grass":     { "type": "tile", "sheet": "acw/a2_ground", "px": 24, "py": 504, "pw": 48, "ph": 48 },
+
+  "wall":          { "type": "tile", "sheet": "acw/b02_fortifications", "col": 4, "row": 0, "color": "#4a4440", "outline": "#2b2724" },
+  "wall_v":        { "type": "tile", "sheet": "acw/b02_fortifications", "col": 0, "row": 1, "color": "#4a4440", "outline": "#2b2724" },
+  "crate":         { "type": "tile", "sheet": "acw/b01_ruins", "col": 10, "row": 13, "color": "#7a5a34", "outline": "#3f2d18" },
+  "crate_pair":    { "type": "tile", "sheet": "acw/b01_ruins", "col": 8, "row": 12, "cols": 2, "rows": 1, "color": "#7a5a34", "outline": "#3f2d18" },
+  "crate_stack":   { "type": "tile", "sheet": "acw/b01_ruins", "col": 14, "row": 6, "cols": 2, "rows": 2, "color": "#7a5a34", "outline": "#3f2d18" },
+  "fence":         { "type": "tile", "sheet": "acw/b02_fortifications", "col": 12, "row": 3, "color": "#a88c5e", "outline": "#5c4a2e" },
+  "fence_v":       { "type": "tile", "sheet": "acw/b02_fortifications", "col": 12, "row": 3, "rotate": 90, "color": "#a88c5e", "outline": "#5c4a2e" },
+  "spikes":        { "type": "tile", "sheet": "acw/b02_fortifications", "col": 6, "row": 4, "color": "#a88c5e", "outline": "#5c4a2e" },
+  "sandbags":      { "type": "tile", "sheet": "acw/b02_fortifications", "col": 2, "row": 2, "color": "#9a8a5a", "outline": "#5a5032", "pattern": "stripes" },
+  "sandbags_v":    { "type": "tile", "sheet": "acw/b02_fortifications", "col": 2, "row": 2, "rotate": 90, "color": "#9a8a5a", "outline": "#5a5032", "pattern": "stripes" },
+
   "bullet":        { "type": "shape", "shape": "circle", "color": "#f2d16b", "size": 4, "trail": 10 },
   "bullet_heavy":  { "type": "shape", "shape": "circle", "color": "#ffb347", "size": 5, "trail": 22 },
   "bullet_enemy":  { "type": "shape", "shape": "circle", "color": "#e07a5f", "size": 4, "trail": 8 },
   "bullet_cursed": { "type": "shape", "shape": "circle", "color": "#b06cff", "size": 5, "trail": 16 },
   "slash":         { "type": "shape", "shape": "arc", "color": "#e8e0d0" },
-  "curse_glow":    { "type": "shape", "shape": "ring", "color": "#b06cff", "size": 30 },
+  "curse_glow":    { "type": "shape", "shape": "ring", "color": "#b06cff", "size": 36 },
   "pickup_ammo":   { "type": "shape", "shape": "rect", "color": "#d6b45a", "outline": "#6b5a2e", "size": 10 },
-  "floor":         { "type": "shape", "shape": "grid", "color": "#1a1714", "line": "#221e1a" },
 
-  "_sprite_example": { "type": "sprite", "src": "sprites/player.png", "frameW": 48, "frameH": 48, "size": 48, "facing": true }
+  "_placeholders": {
+    "player_shape":        { "type": "shape", "shape": "circle", "color": "#4d7cc7", "outline": "#dfe8f5", "size": 24, "facing": true, "facingColor": "#f0e6c8" },
+    "enemy_regular_shape": { "type": "shape", "shape": "circle", "color": "#8a7a5a", "outline": "#3a2f22", "size": 24, "facing": true, "facingColor": "#e6d9b8" }
+  }
 }

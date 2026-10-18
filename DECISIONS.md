@@ -99,3 +99,15 @@ The builder cannot play. Every "feel" claim below is a measurement from driving 
 - Enemies stacking two to a crate looks silly even with separation. Spot occupancy cost may need to go up.
 - The rifle's 3.4 s reload may be too long without a dodge-cancel escape; watch for it feeling like a punishment rather than a decision.
 - Grit has no feedback other than the bar. A cast should probably do something visible on the player beyond the ring.
+
+## D-016 · Tiles are 48 px, set by the art pack — 10-18
+
+The PRD asked for 16 or 32 px tiles under 48 px characters. Kevin's downloaded pack ("American Civil War", RPG Maker MV/MZ layout) is 48 px throughout, with soldiers drawn to the same cell. Resampling 48→32 would soften the pixel art, so the world grid moves to 48. Arena stays 40×30 tiles (now 1920×1440 px); the 960×540 camera shows 20×11 tiles. Characters are one tile tall, which is the pack's intended look.
+
+**Sheets, as copied to `public/sprites/acw/`:** `a2_ground` (autotile blocks; the seamless interior of each 2×3 block is the 48×48 window at +24,+72), `a4_walls1/2` (not used yet), `b01_ruins` (crates, rubble, cannons), `b02_fortifications` (palisade, sandbags, fences, chevaux-de-frise, trenches, dead trees, graves, rifle stacks), `b03_camp` (tents, wagons, barrels, fires), `b04_confederate`, `b05_union` (static poses, several facings).
+
+**Characters without animation.** The pack has poses, not walk cycles. `sprite4` picks one cell per facing (right, down, up; left is a horizontal flip of right) from the aim angle. The player keeps a thin aim line because the sprite only has four facings and the gun points anywhere. Walk animation is a later purchase or generation task; it does not block the Valley.
+
+**Cover rects are the full cell.** A sandbag cell has empty pixels above the bags, so collision is slightly generous. Acceptable for now; tighten per visual if it reads wrong.
+
+**License flag.** No license file came in the archive. The repo and the gh-pages site are public, so committing the sheets redistributes them. Kevin to confirm the pack's terms allow that, or the repo goes private.
