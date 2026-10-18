@@ -78,3 +78,24 @@ Rolling with a half-loaded cylinder loses the reload progress. It makes "roll no
 ## D-014 · Enemies mildly prefer chest-high cover — 10-18
 
 Spot scoring gives a small bonus to cover they can see over. Behind a wall they must peek, which gives the player a window; behind sandbags they fire continuously but can be flanked. Mixing both is what makes a group feel varied.
+
+## D-015 · Feel notes from the first probes (numbers, not opinions) — 10-18
+
+The builder cannot play. Every "feel" claim below is a measurement from driving `window.__game.step()` and the live loop under Playwright; the rest is for Kevin to judge.
+
+| Thing | Measured | Read |
+|---|---|---|
+| Walk / sprint | 150 / 240 px/s (4.7 / 7.5 tiles/s); arena crossed in ~8.5 s walking | Deliberate, not sluggish. Sprint burns the bar in 3.5 s. |
+| Dodge | 160 px in 0.38 s, 13 frames (0.22 s) invulnerable, 25 stamina | Four rolls empty the bar; the choice is real. |
+| Saber | 5 swings in 2 s, 38 dmg each; a regular (60 hp) dies in 2 swings | Fast and committal; you must close 300 px of open ground to use it. |
+| Pistol | 6 shots in 1.6 s on click spam, then 1.9 s reload; 24 dmg; 3 shots to kill | Rhythm is tap-tap-tap-tap-tap-tap-pause. Spread 5° means ~1 miss in 8 at 200 px. |
+| Rifle | 90 dmg, one shot, 3.4 s reload; shots at 0.0 s and 3.4 s | Two seconds of nothing after every shot. Lethal to a regular in one hit, so the rhythm is "line it up, commit". |
+| Cover | Wall and sandbags stop rounds both ways; fence does not; leaning on sandbags fires over them | Verified by event log, not eyeballed. |
+| Enemy vs. stationary player | One regular at ~320 px: 31 shots in 15 s, player at 23 hp after 20 s (before the accuracy/damage bump) | Too slow. Accuracy 0.68→0.78 and carbine 11→13 dmg to put a single-enemy kill around 10 s and a two-enemy kill around 4 s. Re-measure after a human plays it. |
+| Flanked enemy | Player moved to its exposed side: re-picked the opposite face of the same sandbags in <1 s | Works. |
+| 20 enemies | 0.11 ms sim + 0.16 ms render per frame; live loop reports 60 fps | Perf is a non-issue for Milestone 0. |
+
+**Flags for the human playtest**
+- Enemies stacking two to a crate looks silly even with separation. Spot occupancy cost may need to go up.
+- The rifle's 3.4 s reload may be too long without a dodge-cancel escape; watch for it feeling like a punishment rather than a decision.
+- Grit has no feedback other than the bar. A cast should probably do something visible on the player beyond the ring.

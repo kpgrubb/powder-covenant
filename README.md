@@ -28,7 +28,7 @@ Unit tests cover weapon math, line-of-sight raycasts, and the debug panel's appl
 | Left click | Fire / swing |
 | Shift | Sprint (costs stamina) |
 | Space | Dodge roll (costs stamina, brief invulnerability) |
-| R | Reload |
+| R | Reload (also starts on its own when the clip empties) |
 | 1 / 2 / 3 | Saber / Pistol / Rifle |
 | Q | Cursed Shot: next hit burns (costs Grit) |
 | N | Spawn an enemy (debug) |
